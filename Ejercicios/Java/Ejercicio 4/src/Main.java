@@ -3,6 +3,6 @@ import java.util.Scanner;//TIP To <b>Run</b> code, press <shortcut actionId="Run
 public class Main {
     public static void main(String[] args) {
         Scanner entradas = new Scanner(System.in);
-        
+
     }
 }
