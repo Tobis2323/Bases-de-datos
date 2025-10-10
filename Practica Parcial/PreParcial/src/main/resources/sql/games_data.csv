@@ -1,0 +1,11 @@
+SET_NAME;PROD_ID;PROD_DESC;REVIEW_DIFFICULTY;PIECE_COUNT;STAR_RATING;LIST_PRICE;THEME;AGE_GROUP;COUNTRY
+Millennium Falcon;75257;"Iconic ship from the Star Wars saga";"Hard";1351;4.8;159.99;['Star Wars'];['8-14'];['United States']
+Lamborghini Sián;42115;"Technic supercar replica";"Expert";3696;4.9;379.99;['Technic'];['12+'];['Germany']
+Tuning Workshop;60258;"City garage playset";"Medium";897;4.2;99.99;['City'];['6-12'];['United States']
+Hogwarts Clock Tower;75948;"Harry Potter castle scene";"Medium";922;4.7;89.99;['Harry Potter'];['8-14'];['France']
+Legacy Destiny’s Bounty;71705;"Ninjago flying ship";"Hard";1780;4.6;139.99;['Ninjago'];['10+'];['Spain']
+Police Station;10278;"Modular building set of a detailed police headquarters";"Expert";2923;4.9;199.99;['City'];['12+'];['Denmark']
+Bugatti Chiron;42083;"Realistic LEGO Technic model of the Bugatti Chiron";"Expert";3599;4.8;349.99;['Technic'];['12+'];['Germany']
+Diagon Alley;75978;"Famous Harry Potter shopping street recreation";"Hard";5544;4.9;449.99;['Harry Potter'];['10+'];['United States']
+Ninja Dojo Temple;71767;"Ninjago temple battle set";"Medium";1394;4.5;119.99;['Ninjago'];['8-14'];['Spain']
+AT-AT Walker;75313;"Large-scale Star Wars AT-AT from The Empire Strikes Back";"Expert";6785;5.0;849.99;['Star Wars'];['12+'];['Denmark']

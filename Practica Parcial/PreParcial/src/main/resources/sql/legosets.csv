@@ -1,0 +1,51 @@
+PROD_ID,SET_NAME,PROD_DESC,THEME,AGE,REVIEW_DIFFICULTY,PIECE_COUNT,STAR_RATING,LIST_PRICE,COUNTRY
+10001,Millennium Falcon,Build the iconic ship from Star Wars with incredible detail and moving parts,Star Wars,12+,Very Difficult,7541,4.8,849.99,US
+10002,Hogwarts Castle,Recreate the magical castle from Harry Potter with multiple rooms and towers,Harry Potter,16+,Very Difficult,6020,4.9,469.99,GB
+10003,Fire Station,Classic city fire station with vehicles and firefighter minifigures,City,6-12,Easy,509,4.5,59.99,US
+10004,Police Station,Downtown police station with jail cells and police vehicles,City,6-12,Easy,743,4.6,89.99,CA
+10005,Batmobile Tumbler,The Dark Knight's armored vehicle with authentic details,Super Heroes,16+,Very Difficult,2049,4.7,229.99,US
+10006,Taj Mahal,Architectural masterpiece with intricate details and authentic design,Architecture,18+,Very Difficult,5923,4.9,369.99,US
+10007,Disney Castle,Magical Disney castle with multiple princesses and detailed interior,Disney,16+,Difficult,4080,4.8,349.99,US
+10008,Ninjago City,Bustling Asian-inspired city with multiple levels and shops,Ninjago,14+,Difficult,4867,4.7,299.99,US
+10009,Technic Bugatti,Working model of the Chiron supercar with detailed engine,Technic,16+,Very Difficult,3599,4.8,379.99,FR
+10010,Saturn V Rocket,1:110 scale model of the NASA rocket with three stages,Ideas,14+,Difficult,1969,4.9,119.99,US
+10011,Pirate Ship,Classic pirate ship with cannons and treasure,Pirates,8-14,Average,1264,4.5,149.99,GB
+10012,Princess Castle,Pink and purple castle with royal minifigures,Disney Princess,4-7,Easy,585,4.6,79.99,US
+10013,Monster Truck,Big wheels off-road vehicle with suspension,Technic,10+,Average,433,4.4,49.99,DE
+10014,Ambulance,Emergency vehicle with opening doors and medical equipment,City,5+,Easy,185,4.3,19.99,NL
+10015,Race Car,Formula 1 inspired racing car with pit crew,Speed Champions,7-14,Easy,328,4.5,39.99,IT
+10016,Beach House,Coastal vacation home with beach accessories,Friends,6-12,Easy,444,4.4,49.99,AU
+10017,Submarine,Deep sea exploration submarine with diver,City,7+,Average,286,4.2,34.99,NO
+10018,Dragon Castle,Medieval castle under siege by a fire-breathing dragon,Castle,9-14,Difficult,1426,4.7,129.99,GB
+10019,Space Shuttle,NASA space shuttle with external tank and boosters,Space,10+,Average,1230,4.6,99.99,US
+10020,Farm Tractor,Green tractor with trailer and farm animals,City,4-7,Easy,178,4.3,24.99,NL
+10021,Bulldozer,Heavy construction equipment with movable blade,Technic,8-12,Average,592,4.5,69.99,DE
+10022,Elves Treehouse,Magical treehouse in an enchanted forest,Elves,8-12,Average,695,4.4,59.99,GB
+10023,Minecraft Village,Blocky village with creepers and villagers,Minecraft,8+,Easy,1673,4.6,149.99,US
+10024,Jurassic Park Gate,Iconic entrance gate with T-Rex and jeep,Jurassic World,8-14,Average,1212,4.7,119.99,US
+10025,Roller Coaster,Working amusement park roller coaster with motor,Creator Expert,16+,Very Difficult,4124,4.8,379.99,US
+10026,Lighthouse,Coastal lighthouse with keeper's cottage and boat,Creator,8-14,Average,528,4.4,49.99,DN
+10027,Ice Cream Truck,Colorful truck serving frozen treats,City,5-12,Easy,200,4.2,19.99,US
+10028,Ghostbusters Ecto-1,Classic car from the movie with ghost trap,Ideas,10+,Average,2352,4.7,199.99,US
+10029,Treehouse Adventure,Multi-level treehouse with zip line and animals,Friends,7-12,Average,1114,4.5,99.99,US
+10030,Porsche 911,Detailed sports car with working steering,Creator Expert,16+,Difficult,2704,4.8,149.99,DE
+10031,Airport Terminal,Busy airport with planes and passenger gates,City,6-12,Difficult,1053,4.6,119.99,NL
+10032,Haunted House,Spooky mansion with ghosts and monsters,Monster Fighters,9-14,Average,2064,4.5,179.99,US
+10033,Train Station,Classic station with platform and ticket office,City,6-12,Average,907,4.4,89.99,FR
+10034,Knight's Kingdom,Medieval fortress with knights and horses,Castle,7-14,Average,781,4.3,79.99,GB
+10035,Pickup Truck,American-style truck with opening tailgate,Creator,7-12,Easy,344,4.2,29.99,US
+10036,Modular Diner,1950s American diner with jukebox,Creator Expert,16+,Difficult,2480,4.9,169.99,US
+10037,Scooby-Doo Mystery Machine,Iconic van with the whole gang,Scooby-Doo,8+,Easy,301,4.6,29.99,US
+10038,Volkswagen Camper,Classic VW bus in turquoise and white,Creator Expert,16+,Difficult,1334,4.8,119.99,DE
+10039,Excavator,Heavy construction digger with moving arm,Technic,10-16,Difficult,569,4.5,59.99,DE
+10040,Heart Box,Romantic gift box with roses inside,Seasonal,12+,Easy,511,4.3,49.99,FR
+10041,Cinderella's Dream,Princess carriage with horses and castle,Disney Princess,4-10,Easy,646,4.5,69.99,US
+10042,Statue of Liberty,Iconic American monument with pedestal,Architecture,16+,Difficult,1685,4.7,119.99,US
+10043,London Bus,Red double-decker bus,Creator Expert,16+,Average,1686,4.6,139.99,GB
+10044,Pet Shop,Modular building with animal store and apartment,Creator Expert,16+,Difficult,2032,4.8,149.99,US
+10045,Monster Jam Grave Digger,Famous monster truck with huge tires,Technic,7-14,Easy,212,4.4,19.99,US
+10046,Winter Village Market,Holiday market with ice skating rink,Winter Village,10+,Average,1261,4.7,99.99,DN
+10047,Harley-Davidson Fat Boy,Detailed motorcycle with stand,Creator Expert,16+,Difficult,1023,4.6,99.99,US
+10048,Batcave,Batman's secret headquarters with multiple levels,Super Heroes,8-14,Difficult,1037,4.7,119.99,US
+10049,Empire State Building,Art Deco skyscraper landmark,Architecture,12+,Average,1767,4.5,129.99,US
+10050,Cargo Plane,Large transport aircraft with opening cargo bay,City,6-12,Average,692,4.4,79.99,US
