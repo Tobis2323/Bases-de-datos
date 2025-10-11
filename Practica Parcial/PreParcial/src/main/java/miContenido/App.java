@@ -1,10 +1,12 @@
 package miContenido;
 
 import jakarta.persistence.EntityManager;
-import miContenido.Service.CountryService;
 import miContenido.Service.LegoSetService;
-import miContenido.model.Country;
+import miContenido.Service.ThemeService;
+import miContenido.Service.AgeGroupService;
 import miContenido.model.LegoSet;
+import miContenido.model.AgeGroup;
+import miContenido.model.CountryCostRating;
 import miContenido.util.CsvParser;
 import miContenido.util.LocalEntityManagerProvider;
 
@@ -13,6 +15,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class App {
     public static void main(String[] args) throws URISyntaxException {
@@ -20,52 +23,70 @@ public class App {
         EntityManager em = LocalEntityManagerProvider.getEntityManager();
         System.out.println("✅ Conexión establecida correctamente.");
 
-        // 2️⃣ Parsear CSV de ejemplo
-        URL fileUrl = App.class.getResource("/sql/legosets_sample.csv");
+        // Localizar CSV en el classpath
+        URL fileUrl = App.class.getResource("/sql/lego_sets_data.csv");
         if (fileUrl == null) {
-            System.err.println("No se encontró legosets_sample.csv en resources/sql");
+            System.err.println("No se encontró lego_sets_data.csv en resources/sql");
             em.close();
             LocalEntityManagerProvider.close();
             return;
         }
         Path path = Paths.get(fileUrl.toURI());
-        CsvParser parser = new CsvParser();
-        List<LegoSet> legoSets = parser.parsearLegoSets(path);
 
-        // 3️⃣ Persistir los LegoSet
+        // Servicios
         LegoSetService legoSetService = new LegoSetService();
-        legoSetService.agregarArrayList(legoSets);
+        ThemeService themeService = new ThemeService();
+        AgeGroupService ageGroupService = new AgeGroupService();
 
-        // 4️⃣ Mostrar resumen
-        CountryService countryService = new CountryService();
-        List<Country> countries = countryService.getAllCountries();
+        // Importar desde CSV
+        CsvParser parser = new CsvParser();
+        List<LegoSet> aInsertar = parser.parsearLegoSets(path);
+        legoSetService.agregarArrayList(aInsertar);
+        System.out.println("✅ CSV leido correctamente.");
 
-        System.out.println("Países (seed): " + countries.size());
-        for (int i = 0; i < Math.min(5, countries.size()); i++) {
-            System.out.println(" - " + countries.get(i).getCode() + " " + countries.get(i).getName());
+        // Consultas simples sobre la BD
+        List<LegoSet> sets = legoSetService.getAllLegoSets();
+        List<AgeGroup> ageGroups = ageGroupService.getAllAgeGroups();
+        int cantTematicas = themeService.getAllThemes().size();
+
+        // Salida simple requerida
+        System.out.println("\n=== Resultado de la importación ===");
+        System.out.println("Importación finalizada usando JPA desde lego_sets_data.csv.");
+
+        System.out.println("\n=== Cantidad de Sets en la base de datos ===");
+        System.out.println(sets.size());
+
+        System.out.println("\n=== Cantidad de Rangos de edad distintos ===");
+        System.out.print(ageGroups.size() + " rangos");
+        // Mostrar los códigos de rango de forma simple, separados por coma
+        if (!ageGroups.isEmpty()) {
+            String codigos = ageGroups.stream()
+                    .map(AgeGroup::getCode)
+                    .distinct()
+                    .collect(Collectors.joining(", "));
+            System.out.println(": " + codigos);
+        } else {
+            System.out.println();
         }
 
-        List<LegoSet> saved = legoSetService.getAllLegoSets();
-        System.out.println("Sets cargados por CSV: " + saved.size());
-        for (LegoSet ls : saved) {
-            System.out.println(" * [" + ls.getProdId() + "] " + ls.getSetName() + " ($" + ls.getListPrice() + ")");
+        System.out.println("\n=== Cantidad de Temáticas distintas ===");
+        System.out.println(cantTematicas);
+
+        // Ranking de los 5 países con menor costo/valoración promedio
+        List<CountryCostRating> top5 = legoSetService.findTopCountriesByAvgCostPerStar(5);
+        System.out.println("\n=== Ranking de los 5 Países con la relación costo/valoración más baja ===");
+        if (top5.isEmpty()) {
+            System.out.println("(No hay sets disponibles por país)");
+        } else {
+            int rank = 1;
+            for (CountryCostRating r : top5) {
+                // Formateo a 2 decimales
+                String avg = String.format("%.2f", r.getAvgCostPerStar());
+                System.out.println("#" + rank + " " + r.getCode() + " " + r.getName() + " -> $" + avg + "/estrella");
+                rank++;
+            }
         }
 
-        // ➕ Listar todos los sets con relaciones (JOIN FETCH)
-        List<LegoSet> withRelations = legoSetService.findAllWithRelations();
-        System.out.println("\nSets con detalles (Theme, AgeGroup, Country): " + withRelations.size());
-        for (LegoSet ls : withRelations) {
-            String themeName = (ls.getTheme() != null ? ls.getTheme().getName() : "-");
-            String ageCode = (ls.getAgeGroup() != null ? ls.getAgeGroup().getCode() : "-");
-            String countryInfo = (ls.getCountry() != null ? (ls.getCountry().getCode() + " " + ls.getCountry().getName()) : "-");
-            System.out.println(" - [" + ls.getProdId() + "] " + ls.getSetName() +
-                    " | Theme=" + themeName +
-                    " | Age=" + ageCode +
-                    " | Country=" + countryInfo +
-                    " | $" + ls.getListPrice());
-        }
-
-        // 7️⃣ Cerrar recursos
         em.close();
         LocalEntityManagerProvider.close();
     }

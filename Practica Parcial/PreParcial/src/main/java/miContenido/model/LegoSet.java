@@ -36,6 +36,9 @@ public class LegoSet {
     @Column(name = "LIST_PRICE", precision = 10, scale = 2)
     private BigDecimal listPrice;
 
+    @Column(name = "NUM_REVIEWS")
+    private Integer numReviews;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "THEME_ID")
     @ToString.Exclude

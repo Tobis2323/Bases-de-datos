@@ -2,6 +2,7 @@ package miContenido.Repository;
 
 
 import miContenido.model.LegoSet;
+import miContenido.model.CountryCostRating;
 import miContenido.util.LocalEntityManagerProvider;
 
 import java.util.List;
@@ -34,5 +35,17 @@ public class LegoSetRepository extends BaseRepository<LegoSet, Integer> {
                 "JOIN FETCH ls.ageGroup " +
                 "JOIN FETCH ls.country";
         return em.createQuery(jpql, LegoSet.class).getResultList();
+    }
+
+    // ✅ Nuevo: Top países con menor costo/valoración promedio (AVG(listPrice/starRating))
+    public List<CountryCostRating> findTopCountriesByAvgCostPerStar(int limit) {
+        String jpql = "SELECT new miContenido.model.CountryCostRating(c.code, c.name, AVG(ls.listPrice / ls.starRating)) " +
+                "FROM LegoSet ls JOIN ls.country c " +
+                "WHERE ls.listPrice IS NOT NULL AND ls.starRating IS NOT NULL AND ls.starRating > 0 " +
+                "GROUP BY c.code, c.name " +
+                "ORDER BY AVG(ls.listPrice / ls.starRating) ASC";
+        return em.createQuery(jpql, CountryCostRating.class)
+                .setMaxResults(limit)
+                .getResultList();
     }
 }

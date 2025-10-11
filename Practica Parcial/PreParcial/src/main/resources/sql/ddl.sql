@@ -115,6 +115,7 @@ CREATE TABLE LEGO_SETS (
                            PIECE_COUNT       INTEGER,
                            STAR_RATING       DECIMAL(3,1),
                            LIST_PRICE        DECIMAL(10,2),
+                           NUM_REVIEWS       INTEGER,
                            THEME_ID          INTEGER       NOT NULL,
                            AGE_GROUP_ID      INTEGER       NOT NULL,
                            COUNTRY_ID        INTEGER       NOT NULL,
