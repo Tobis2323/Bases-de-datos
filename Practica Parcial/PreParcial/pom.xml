@@ -53,13 +53,22 @@
   </dependencies>
   <build>
     <plugins>
-      <!--  Ejecutar main rápido: mvn -q exec:java -Dexec.mainClass=utnfc.isi.back.app.SmokeMain  -->
+      <!-- Forzar Java 21 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <release>21</release>
+        </configuration>
+      </plugin>
+      <!-- Ejecutar main del proyecto -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-          <mainClass>utnfc.isi.back.sim.DemoMain</mainClass>
+          <mainClass>miContenido.App</mainClass>
         </configuration>
       </plugin>
       <plugin>

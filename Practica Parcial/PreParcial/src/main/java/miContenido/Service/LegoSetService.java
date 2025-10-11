@@ -1,9 +1,8 @@
 package miContenido.Service;
 
 import miContenido.Repository.LegoSetRepository;
-import miContenido.model.Country;
 import miContenido.model.LegoSet;
-import miContenido.model.Theme;
+import miContenido.model.CountryCostRating;
 
 import java.util.List;
 
@@ -42,5 +41,20 @@ public class LegoSetService {
          }
      }
 
+     // ✅ Nuevo: traer todos los sets con sus relaciones (JOIN FETCH)
+     public List<LegoSet> findAllWithRelations() {
+         return legoSetRepository.findAllWithRelations();
+     }
+
+     // ✅ Nuevo: búsqueda por prefijo de nombre (case-insensitive)
+     public List<LegoSet> findBySetNameStartingWithIgnoreCase(String prefix) {
+         return legoSetRepository.findBySetNameStartingWithIgnoreCase(prefix);
+     }
+
+     // ✅ Nuevo: ranking países por menor costo/valoración promedio
+     public List<CountryCostRating> findTopCountriesByAvgCostPerStar(int limit) {
+         return legoSetRepository.findTopCountriesByAvgCostPerStar(limit);
+     }
 
 }
+

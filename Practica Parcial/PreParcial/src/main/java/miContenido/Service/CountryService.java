@@ -32,7 +32,23 @@ public class CountryService {
     }
 
 
-    // ✅ NUEVO MÉTODO PARA GUARDAR UNA LISTA ENTERA
+    // ✅ NUEVO: buscar por código (COUNTRIES.CODE)
+    public Country getCountryByCode(String code) {
+        return countryRepository.findByCode(code);
+    }
+
+    // ✅ NUEVO: find-or-create por código (evita violar NOT NULL/UNIQUE de CODE)
+    public Country findOrCreateByCode(String code) {
+        Country existente = countryRepository.findByCode(code);
+        if (existente != null) return existente;
+        Country nuevo = new Country();
+        nuevo.setCode(code);
+        // Si no tenemos nombre disponible, guardamos el código como nombre temporalmente.
+        nuevo.setName(code);
+        return countryRepository.save(nuevo);
+    }
+
+    // Método previo por nombre (se mantiene por compatibilidad)
     public void agregarArrayList(List<Country> countries) {
         for (Country country : countries) {
             countryRepository.save(country);
@@ -46,10 +62,9 @@ public class CountryService {
                 return country;
             }
         }
-        // Si no existe, lo creo, lo guardo y lo retorno
+        // Si no existe, lo creo, lo guardo y retorno la instancia gestionada
         Country nuevo = new Country();
         nuevo.setName(countryName);
-        countryRepository.save(nuevo);
-        return nuevo;
+        return countryRepository.save(nuevo);
     }
 }

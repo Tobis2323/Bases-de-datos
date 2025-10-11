@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class EntityManagerProvider {
+public class LocalEntityManagerProvider {
 
     private static final String PERSISTENCE_UNIT = "paraElParcial";
     private static final EntityManagerFactory emf;

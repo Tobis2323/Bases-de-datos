@@ -36,16 +36,25 @@ public class LegoSet {
     @Column(name = "LIST_PRICE", precision = 10, scale = 2)
     private BigDecimal listPrice;
 
-    @ManyToOne(optional = false)
+    @Column(name = "NUM_REVIEWS")
+    private Integer numReviews;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "THEME_ID")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Theme theme;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "AGE_GROUP_ID")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private AgeGroup ageGroup;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "COUNTRY_ID")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Country country;
 
 

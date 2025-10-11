@@ -46,10 +46,9 @@ public class ThemeService {
                 return theme;
             }
         }
-        // Si no existe, lo creo, lo guardo y lo retorno
+        // Si no existe, lo creo y retorno la entidad gestionada por merge (con ID)
         Theme nuevo = new Theme();
         nuevo.setName(themeName);
-        themeRepository.save(nuevo);
-        return nuevo;
+        return themeRepository.save(nuevo);
     }
 }

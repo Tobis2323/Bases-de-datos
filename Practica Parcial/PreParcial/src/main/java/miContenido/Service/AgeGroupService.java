@@ -45,11 +45,10 @@ public class AgeGroupService {
                 return ageGroup;
             }
         }
-        // Si no existe, lo creo, lo guardo y lo retorno
+        // Si no existe, lo creo, lo guardo (recuperando el managed) y lo retorno
         miContenido.model.AgeGroup nuevo = new miContenido.model.AgeGroup();
         nuevo.setCode(ageCode);
-        ageGroupRepository.save(nuevo);
-        return nuevo;
+        return ageGroupRepository.save(nuevo);
     }
 
 }
