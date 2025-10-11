@@ -2,11 +2,11 @@ package miContenido.Repository;
 
 
 import miContenido.model.AgeGroup;
-import miContenido.util.EntityManagerProvider;
+import miContenido.util.LocalEntityManagerProvider;
 
 public  class AgeGroupRepository extends BaseRepository<AgeGroup, Integer> {
     public AgeGroupRepository () {
-        super(EntityManagerProvider.getEntityManager(), AgeGroup.class);
+        super(LocalEntityManagerProvider.getEntityManager(), AgeGroup.class);
     }
 
 }

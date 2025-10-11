@@ -24,16 +24,17 @@ public abstract class BaseRepository<T, ID> {
 
 
     // Usamos merge para save y update, ya que si el entity no tiene id, lo inserta, y si tiene id, lo actualiza
-    public void save(T entity){
-
+    public T save(T entity){
         try{
             em.getTransaction().begin();
-            em.merge(entity);
+            T managed = em.merge(entity);
             em.getTransaction().commit();
-
+            return managed;
         }catch(Exception e){
-            em.getTransaction().rollback();
-            throw e;
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
         }
     }
 
@@ -43,19 +44,24 @@ public abstract class BaseRepository<T, ID> {
             em.merge(entity);
             em.getTransaction().commit();
         }catch(Exception e){
-            em.getTransaction().rollback();
-            throw e;
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
         }
     }
 
     public void delete(T entity){
         try{
             em.getTransaction().begin();
-            em.remove(entity);
+            // asegurar que la entidad esté gestionada antes de borrar
+            em.remove(em.contains(entity) ? entity : em.merge(entity));
             em.getTransaction().commit();
         }catch(Exception e){
-            em.getTransaction().rollback();
-            throw e;
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException(e);
         }
     }
 

@@ -1,0 +1,7 @@
+PROD_ID,SET_NAME,PROD_DESC,THEME,AGE,REVIEW_DIFFICULTY,PIECE_COUNT,STAR_RATING,LIST_PRICE,COUNTRY
+20001,Starter Ship,Iconic star spaceship,Star Wars,12+,Medium,1000,4.5,199.99,US
+20002,Magic Castle,Wizard castle with towers,Harry Potter,16+,Hard,2500,4.8,299.99,GB
+20003,City Fire Truck,City fire truck with ladder,City,6-12,Easy,350,4.2,39.99,DE
+20004,Monster Car,Big wheels offroad vehicle,Technic,10+,Average,550,4.4,59.99,FR
+20005,Beach House,Coastal vacation house,Friends,8-14,Easy,600,4.3,69.99,ES
+

@@ -1,8 +1,6 @@
 package miContenido.util;
 
-import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 
 import miContenido.Service.AgeGroupService;
@@ -17,7 +15,6 @@ import miContenido.model.LegoSet;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,33 +30,42 @@ public class CsvParser {
 
         List<LegoSet> vecLegoSets = new ArrayList<>();
 
-        try (CSVReader reader = new CSVReader(new java.io.FileReader(path.toFile()));) {
+        try (CSVReader reader = new CSVReader(new java.io.FileReader(path.toFile()))) {
             reader.readNext(); // Saltar la cabecera
             String[] fila;
+            int rowNum = 1; // contando desde después del header
             while ((fila = reader.readNext()) != null) {
+                rowNum++;
+                if (fila.length == 0) {
+                    // línea vacía
+                    continue;
+                }
+                // Saltar filas incompletas
+                if (fila.length < 10) {
+                    System.out.println("Fila " + rowNum + " ignorada: columnas insuficientes (" + fila.length + ")");
+                    continue;
+                }
+                // Validar primera columna (PROD_ID)
+                if (fila[0] == null || fila[0].trim().isEmpty()) {
+                    System.out.println("Fila " + rowNum + " ignorada: PROD_ID vacío");
+                    continue;
+                }
 
-                // --- Ahora fila[] tiene todos los valores separados por ; ---
-
-                System.out.println("Aqui");
-                System.out.println(fila[1]);
-                Integer prodId = Integer.parseInt(fila[0]);
-                String setName = fila[1];
-                String prodDesc = fila[2];
-                String themeName = fila[3]; // theme
-                String ageCode = fila[4]; // age group
-                String reviewDifficulty = fila[5];
-                int pieceCount = Integer.parseInt(fila[6]);
-                double starRating = Double.parseDouble(fila[7]);
-                double listPrice = Double.parseDouble(fila[8]);
-                String countryName = fila[9]; // country
-
-
+                Integer prodId = Integer.parseInt(fila[0].trim());
+                String setName = safeTrim(fila[1]);
+                String prodDesc = safeTrim(fila[2]);
+                String themeName = safeTrim(fila[3]);
+                String ageCode = safeTrim(fila[4]);
+                String reviewDifficulty = safeTrim(fila[5]);
+                int pieceCount = Integer.parseInt(fila[6].trim());
+                double starRating = Double.parseDouble(fila[7].trim());
+                double listPrice = Double.parseDouble(fila[8].trim());
+                String countryCode = safeTrim(fila[9]);
 
                 Theme theme = themeService.findOrCreateByName(themeName);
                 AgeGroup ageGroup = ageGroupService.findOrCreateByCode(ageCode);
-                Country country = countryService.findOrCreateByName(countryName);
+                Country country = countryService.findOrCreateByCode(countryCode);
 
-                // Crear objeto principal
                 LegoSet objLegoSet = new LegoSet();
                 objLegoSet.setProdId(prodId);
                 objLegoSet.setSetName(setName);
@@ -80,5 +86,9 @@ public class CsvParser {
         }
 
         return vecLegoSets;
+    }
+
+    private static String safeTrim(String s) {
+        return s == null ? null : s.trim();
     }
 }

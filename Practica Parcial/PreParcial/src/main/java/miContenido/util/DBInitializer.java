@@ -4,9 +4,12 @@ package miContenido.util;
 import org.h2.tools.RunScript;
 
 import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * Inicializa/recrea el esquema ejecutando sql/ddl.sql con el runner oficial de H2.
@@ -24,21 +27,21 @@ public final class DBInitializer {
 
     public static void recreateSchemaFromDdl() {
         try (Connection cn = DriverManager.getConnection(URL, USER, PASS)) {
-            var in = DBInitializer.class.getResourceAsStream(DDL_CLASSPATH);
+            InputStream in = DBInitializer.class.getResourceAsStream(DDL_CLASSPATH);
             if (in == null) {
                 throw new IllegalStateException("No se encontró el recurso " + DDL_CLASSPATH +
                         " en el classpath (¿está en src/main/resources/sql/ddl.sql?).");
             }
 
-            try (var reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
+            try (InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8)) {
                 RunScript.execute(cn, reader);
             }
 
-            try (var ps = cn.prepareStatement("SELECT COUNT(*) FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_COUNTRY_ID'")) {
-                try (var rs = ps.executeQuery()) {
+            try (PreparedStatement ps = cn.prepareStatement("SELECT COUNT(*) FROM INFORMATION_SCHEMA.SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_COUNTRY_ID'")) {
+                try (ResultSet rs = ps.executeQuery()) {
                     rs.next();
                     if (rs.getInt(1) == 0) {
-                        throw new IllegalStateException("La secuencia SEQ_THEME_ID no existe tras correr el DDL. " +
+                        throw new IllegalStateException("La secuencia SEQ_COUNTRY_ID no existe tras correr el DDL. " +
                                 "Revisá el contenido del ddl.sql.");
                     }
                 }

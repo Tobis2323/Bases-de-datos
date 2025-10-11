@@ -42,5 +42,14 @@ public class LegoSetService {
          }
      }
 
+     // ✅ Nuevo: traer todos los sets con sus relaciones (JOIN FETCH)
+     public List<LegoSet> findAllWithRelations() {
+         return legoSetRepository.findAllWithRelations();
+     }
+
+     // ✅ Nuevo: búsqueda por prefijo de nombre (case-insensitive)
+     public List<LegoSet> findBySetNameStartingWithIgnoreCase(String prefix) {
+         return legoSetRepository.findBySetNameStartingWithIgnoreCase(prefix);
+     }
 
 }
